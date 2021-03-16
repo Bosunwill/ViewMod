@@ -6,11 +6,33 @@
 //
 
 import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
+struct Title: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+            .background(Color.green)
+            .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .padding()
+            .background(Color.yellow)
+            .clipShape(Capsule())
+    }
+}
+extension View {
+    func TitleStyle() -> some View {
+        self.modifier(Title())
+    }
+}
+struct ContentView: View {
+    let text1 = Text("Tactician the main text!")
+    var body: some View {
+        VStack{
+            text1
+                .TitleStyle()
+        Text("Just another one!")
+            .TitleStyle()
+            .padding()
+        }
     }
 }
 
